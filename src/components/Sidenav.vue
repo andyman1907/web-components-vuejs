@@ -99,7 +99,7 @@ export default {
   data() {
     return {
       state: true,
-      isActive: true,
+      isActive: false,
       items: []
     };
   },

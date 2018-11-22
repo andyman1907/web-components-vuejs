@@ -6,7 +6,7 @@ import Card from './components/Card.vue';
 import Carousell from './components/Carousell.vue';
 import Modal from './components/Modal.vue';
 import Sidenav from './components/Sidenav.vue';
-
+import Tabs from './components/Tabs.vue';
 
 
 Vue.config.productionTip = false
@@ -29,3 +29,6 @@ window.customElements.define('my-custom-modal', ModalElement);
 
 const SidenavElement = wrap(Vue, Sidenav);
 window.customElements.define('my-custom-sidenav', SidenavElement);
+
+const TabsElement = wrap(Vue, Tabs);
+window.customElements.define('my-custom-tabs', TabsElement);

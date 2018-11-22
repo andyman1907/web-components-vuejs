@@ -87,15 +87,17 @@ body {
 }
 </style>
 <template lang="pug">
+.content
   .modal(v-show="state")
     .modal-content
       .modal-header
-        span.close(@click="toggle('false')") &times;
+        span.close(@click="toggle(false)") &times;
         h2 {{title}}
       .modal-body
         p {{content}}
       .modal-footer(v-if="footer")
         p {{footer}}
+  button.button(@click="toggle(true)") open modal
 </template>
 
 <script>
@@ -104,13 +106,15 @@ export default {
   props: ["title", "content", "footer"],
   data() {
     return {
-      state: true      
+      state: false      
     };
   },
   methods: {
     toggle(state){
-      if(state=='false'){
+      if(state==false){
         this.state=false
+      }else{
+        this.state=state
       }
     }
   },
