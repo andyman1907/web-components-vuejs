@@ -17,23 +17,33 @@ img {
 }
 </style>
 
-<template >
-    <div class="card">
-    <img :src="url" alt="Avatar" style="width:100%">
-    <div class="container">
-        <h4><b>{{title}}</b></h4>
-        <p>{{content}}</p>
-    </div>
-</div>
+<template lang="pug">
+    .card(:data-attributes="dataAttributes")
+      img(:src="url", alt="Avatar", style="width:100%")
+      .container
+        h4
+          b {{title}}
+        p {{content}}    
+
 </template>
 <script>
 export default {
   name: "Card",
   components: {},
-  props: ["title", "content","url"],
-  methods: {},
-  mounted(){
-
+  props: ["title", "content", "url"],
+  data() {
+    return {
+      dataAttributes:'',
+      perro: false
+    };
+  },
+  methods: {
+    getAttributes() {
+      this.dataAttributes = JSON.stringify(this.$props);
+    }
+  },
+  mounted() {
+    this.getAttributes() 
   }
 };
 </script>
