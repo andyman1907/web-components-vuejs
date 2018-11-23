@@ -41,8 +41,8 @@
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    margin-left -17px;
-    margin-top:15px;
+    margin-left: -17px;
+    margin-top: 15px;
 }
 
 .dropdown-content a {
@@ -63,19 +63,19 @@
 }
 </style>
 <template lang="pug">
-.navbar
+.navbar(:data-attributes="dataAttributes")
     .items
         a.item(
             v-for="item in items", 
             v-bind:class="{dropdown: item.children.length>0}",
             :href="item.href"
-        ) {{item.name}}
+        ) {{item.title}}
             i.fa.fa-caret-down(v-if="item.children.length>0")                
             .dropdown-content(v-if="item.children.length>0")
                 a(
                     v-for="children in item.children",
                     :href="children.href"
-                ) {{children.name}}
+                ) {{children.title}}
 </template>
 <script>
 export default {
@@ -85,7 +85,21 @@ export default {
     return {
       state: true,
       isActive: true,
-      items: []
+      items: [],
+      dataAttributes: [
+        {
+          id: "number",
+          title: "string",
+          href: "string",
+          children: [
+            {
+              id: "number",
+              title: "string",
+              href: "string"
+            }
+          ]
+        }
+      ]
     };
   },
   methods: {
@@ -93,9 +107,12 @@ export default {
     getData() {
       this.items.push(
         { id: 1, name: "Inicio", href: "#", children: [] },
-        { id: 2, name: "Contacto", href: "#", children: [
-            { id: 1, name: "Proyecto 0", href: "#proyecto0" },
-        ] },
+        {
+          id: 2,
+          name: "Contacto",
+          href: "#",
+          children: [{ id: 1, name: "Proyecto 0", href: "#proyecto0" }]
+        },
         {
           id: 3,
           name: "Portafolio",
@@ -107,10 +124,14 @@ export default {
           ]
         }
       );
+    },
+    getAttributes() {
+      this.dataAttributes = JSON.stringify(this.dataAttributes);
     }
   },
   mounted() {
     this.getData();
+    this.getAttributes();
   }
 };
 </script>

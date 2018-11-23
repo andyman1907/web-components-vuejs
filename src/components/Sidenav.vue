@@ -21,11 +21,11 @@ body {
 
 .sidenav {
     height: 100%;
-    width: 0;
+    width: 250px;
     position: fixed;
     z-index: 1;
     top: 0;
-    left: 0;
+    left: -100%;
     background-color: #111;
     overflow-x: hidden;
     transition: 0.5s;
@@ -39,7 +39,7 @@ body {
     color: #818181;
     display: block;
     transition: 0.3s;
-    text-align left;
+    text-align: left;
 }
 
 .sidenav a:hover {
@@ -47,7 +47,7 @@ body {
 }
 
 .sidenav.active {
-    width: 250px;
+    left: 0px;
 }
 
 .sidenav .closebtn {
@@ -79,28 +79,38 @@ body {
 </style>
 
 <template lang="pug">
-.temp
+.sidenav-parent(:data-attributes="dataAttributes")
     .overlay(v-bind:class="{ active: isActive }" @click='toggle(false)')
     .sidenav(v-bind:class="{ active: isActive }")
-        a.closebtn(href='javascript:void(0)', @click='toggle(false)') ×        
-        a(:href='item.href' v-for="item in items" v-bind:key="item.id" ) {{item.text}}    
+        a.closebtn(href='javascript:void(0)', @click='toggle(false)') ×
+        a(:href='item.href' v-for="item in items" v-bind:key="item.id" ) {{item.title}}
     .main
-    h2 Sidenav Push Example
     p
-        | Click on the element below to open the side navigation menu, and push this content to the right. Notice that we add a black see-through background-color to body when the sidenav is opened.
-    span(style='font-size:30px;cursor:pointer', @click='toggle(true)') ☰ open
-
+        span(style='font-size:30px;cursor:pointer', @click='toggle(true)') ☰ {{buttonText}}
 </template>
 
 <script>
 export default {
   name: "Sidenav",
-  props: ["title", "content", "footer"],
+  props: ["structure"],
   data() {
     return {
-      state: true,
       isActive: false,
-      items: []
+      defaultButtonText: "Open sidenav",
+      buttonText:"",
+      items: [],
+      dataAttributes: {
+        structure: {
+          buttonText: "string",
+          content: [
+            {
+              id: "number",
+              title: "string",
+              href: "string"
+            }
+          ]
+        }
+      }
     };
   },
   methods: {
@@ -112,15 +122,45 @@ export default {
       }
     },
     getItems() {
-      this.items.push({ id: 1, href: "#1", text: "texto1" });
-      this.items.push({ id: 2, href: "#2", text: "texto2" });
-      this.items.push({ id: 3, href: "#3", text: "texto3" });
-      this.items.push({ id: 4, href: "#4", text: "texto4" });
-      console(this.items)
+      try {
+        if (this.structure != null) {
+          const jsonify = JSON.parse(this.structure);
+          if (jsonify != null && jsonify.content) {
+            jsonify.content.forEach(element => {
+              this.items.push(element);
+            });
+          }
+          this.buttonText =
+            jsonify != null && jsonify.buttonText
+              ? jsonify.buttonText
+              : this.defaultButtonText;
+        } else {
+          /**
+           * si no se definió una estrucutra correcta se genera una estructura inicial básica
+           */
+          this.getDefaultItems();
+        }
+      } catch (error) {
+        this.getDefaultItems();
+      }
+    },
+    getAttributes() {
+      this.dataAttributes = JSON.stringify(this.dataAttributes);
+    },
+    /**
+     * método que retorna el componente default (muestra)
+     */
+    getDefaultItems() {
+      this.items.push({ id: 1, href: "#1", title: "texto1" });
+      this.items.push({ id: 2, href: "#2", title: "texto2" });
+      this.items.push({ id: 3, href: "#3", title: "texto3" });
+      this.items.push({ id: 4, href: "#4", title: "texto4" });
+      this.buttonText = this.defaultButtonText;
     }
   },
   mounted() {
     this.getItems();
+    this.getAttributes();
   }
 };
 </script>

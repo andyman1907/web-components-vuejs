@@ -13,15 +13,16 @@ iframe {
     overflow auto
 </style>
 <template lang="pug">
-.container
-    h1 {{title}}
-    iframe(
-        :src="src",
-        frameborder="0", 
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen="true"
-    )
-    .description {{description}}    
+.video(:data-attributes="dataAttributes")
+    .container
+        h1 {{title}}
+        iframe(
+            :src="src",
+            frameborder="0", 
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen="true"
+        )
+        .description {{description}}    
 </div>
 </template>
 
@@ -33,11 +34,22 @@ export default {
     return {
       state: true,
       isActive: true,
-      items: []
+      items: [],
+      dataAttributes: {
+        title: "string",
+        src: "string",
+        description: "string"
+      }
     };
   },
   methods: {
-    toggle() {}
+    toggle() {},
+    getAttributes() {
+      this.dataAttributes= JSON.stringify(this.dataAttributes);
+    }
+  },
+  mounted() {
+    this.getAttributes();
   }
 };
 </script>

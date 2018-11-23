@@ -4,7 +4,7 @@ body {
 }
 
 /* The Modal (background) */
-.modal {  
+.modal {
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   padding-top: 100px; /* Location of the box */
@@ -87,17 +87,20 @@ body {
 }
 </style>
 <template lang="pug">
-.content
+.content(:data-attributes="dataAttributes")
   .modal(v-show="state")
     .modal-content
       .modal-header
         span.close(@click="toggle(false)") &times;
-        h2 {{title}}
+        h2 
+          slot(name="title")
       .modal-body
-        p {{content}}
+        .modal-body-content
+          slot(name="content")
       .modal-footer(v-if="footer")
-        p {{footer}}
-  button.button(@click="toggle(true)") open modal
+        slot(name="footer")
+  button.button(@click="toggle(true)") 
+    slot(name="buttonText")
 </template>
 
 <script>
@@ -106,19 +109,33 @@ export default {
   props: ["title", "content", "footer"],
   data() {
     return {
-      state: false      
+      state: false,
+      dataAttributes: {
+        slot: {
+          title: "string",
+          content: "string",
+          footer: "string",
+          buttonText: "string"
+        }
+      }
     };
   },
   methods: {
-    toggle(state){
-      if(state==false){
-        this.state=false
-      }else{
-        this.state=state
+    toggle(state) {
+      if (state == false) {
+        this.state = false;
+      } else {
+        this.state = state;
       }
+    },
+    getAttributes() {
+      console.log(JSON.stringify(this.dataAttributes));
+      this.dataAttributes = JSON.stringify({name:"string",content:"string"});
     }
   },
-  mount() {}
+  mount() {
+    this.getAttributes();
+  }
 };
 </script>
 

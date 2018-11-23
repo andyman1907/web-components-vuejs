@@ -49,16 +49,17 @@
 </style>
 
 <template lang="pug">
-    .row(v-if="isActive")
-        .column(v-bind:class="{'column-single':oneColumn,'column-double':twoColumn,'column-triple':threeColumn}")
-            slot(name="one")   
-        .column(v-if="!oneColumn",v-bind:class="{'column-double':twoColumn,'column-triple':threeColumn}")
-            slot(name="two") 
-        .column(v-if="!twoColumn",v-bind:class="{'column-triple':threeColumn}")
-            slot(name="three") 
-        .column(v-if="!threeColumn",v-bind:class="{}")
-            slot(name="four") 
-        button(@click="getAttributes") hola
+    .grid(:data-attributes="dataAttributes")
+        .row(v-if="isActive")
+            .column(v-bind:class="{'column-single':oneColumn,'column-double':twoColumn,'column-triple':threeColumn}")
+                slot(name="one")   
+            .column(v-if="!oneColumn",v-bind:class="{'column-double':twoColumn,'column-triple':threeColumn}")
+                slot(name="two") 
+            .column(v-if="!twoColumn",v-bind:class="{'column-triple':threeColumn}")
+                slot(name="three") 
+            .column(v-if="!threeColumn",v-bind:class="{}")
+                slot(name="four") 
+            button(@click="getAttributes") hola
 </template>
 <script>
 export default {
@@ -69,41 +70,47 @@ export default {
       oneColumn: false,
       twoColumn: false,
       threeColumn: false,
-      fourColumn: true
+      fourColumn: true,
+      dataAttributes: {
+        slots: [
+          { name: "one" },
+          { name: "two" },
+          { name: "three" },
+          { name: "four" }
+        ]
+      }
     };
   },
   methods: {
     validQuantity() {
       if (!this.$slots["one"]) {
-        this.isActive = false;        
+        this.isActive = false;
       } else {
         this.isActive = true;
       }
       if (!this.$slots["two"]) {
         this.oneColumn = true;
-        
       } else {
         this.oneColumn = false;
       }
       if (!this.$slots["three"]) {
         this.twoColumn = true;
-        
       } else {
         this.twoColumn = false;
       }
       if (!this.$slots["four"]) {
         this.threeColumn = true;
-        
       } else {
         this.threeColumn = false;
       }
     },
-    getAttributes(){
-        const jsonify=JSON.stringify(this.$data);        
-        return jsonify;
+    getAttributes() {
+      const jsonify = JSON.stringify(this.dataAttributes);
+      return jsonify;
     }
   },
-  mounted() {
+  mounted() {    
+    this.getAttributes();
     this.validQuantity();
   }
 };
