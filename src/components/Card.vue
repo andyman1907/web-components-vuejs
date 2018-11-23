@@ -33,17 +33,16 @@ export default {
   props: ["title", "content", "url"],
   data() {
     return {
-      dataAttributes:'',
-      perro: false
+      dataAttributes: { title: "string", content: "string", url: "string" }
     };
   },
   methods: {
     getAttributes() {
-      this.dataAttributes = JSON.stringify(this.$props);
+      this.dataAttributes = JSON.stringify(this.dataAttributes);
     }
   },
   mounted() {
-    this.getAttributes() 
+    this.getAttributes();
   }
 };
 </script>

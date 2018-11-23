@@ -34,10 +34,10 @@ img {
     font-size: 18px;
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
-    
 }
-.prev{
-    left:0;
+
+.prev {
+    left: 0;
 }
 
 .next {
@@ -117,9 +117,7 @@ img {
 }
 </style>
 <template lang="pug">
-html
-  head
-  body
+.carousell(:data-attributes="dataAttributes")
     .slideshow-container(v-for="slide in slides" v-bind:key="slide.id")
       .mySlides.fade(v-if="slide.state")
         .numbertext 1 / 3
@@ -140,7 +138,10 @@ export default {
   data() {
     return {
       slides: [],
-      slideIndex: 1
+      slideIndex: 1,
+      dataAttributes: [
+        { id: "number", url: "string", text: "string", state: "boolean" }
+      ]
     };
   },
   methods: {
@@ -191,12 +192,16 @@ export default {
       } catch (error) {
         console(error);
       }
+    },
+    getAttributes() {
+      this.dataAttributes = JSON.stringify(this.dataAttributes);
     }
   },
   mounted() {
     this.slideIndex = 1;
     this.getSlides();
     this.showSlides(this.slideIndex);
+    this.getAttributes();
   }
 };
 </script>

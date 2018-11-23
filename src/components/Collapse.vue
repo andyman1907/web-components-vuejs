@@ -37,17 +37,14 @@
 }
 </style>
 
-<template>
-    <div>
-        <h2>{{title}}</h2>
-        <p>{{subtitle}}</p>
-        <div class="content" v-for="panel in panels" v-bind:key="panel.id">
-            <button  class="accordion" @click="toggle(panel.id)" >{{panel.title}}</button>
-            <div class="panel" v-bind:class="{ in: panel.state }">
-                <p>{{panel.content}}</p>
-            </div>
-        </div>
-    </div>
+<template lang="pug">
+    .collapsex(:data-attributes="dataAttributes")
+        h2 {{title}}
+        p {{subtitle}}
+        .content(v-for="panel in panels" v-bind:key="panel.id")
+          button.accordion(@click="toggle(panel.id)") {{panel.title}}
+            .panel(v-bind:class="{ in: panel.state }")
+              p {{panel.content}}            
 </template>
 <script>
 export default {
@@ -56,34 +53,30 @@ export default {
   data() {
     return {
       panels: [],
-      countries: [
-        { name: "Argentina", value: "argentina" },
-        { name: "Colombia", value: "colombia" },
-        { name: "España", value: "spain" }
-      ],
-      selectedCountry: "argentina",
+      dataAttributes: {
+        title: "string",
+        subtitle: "string",
+        content: [
+          {
+            id: "number",
+            title: "string",
+            content: "string",
+            state: "boolean"
+          }
+        ]
+      },
       loading: true
     };
   },
   methods: {
-    /* refreshArtists() {
-      const self = this;
-      this.loading = true;
-      this.artists = [];
-      getArtists(this.selectedCountry).then(function(artists) {
-        self.loading = false;
-        self.artists = artists;
-      });
-    } */
     toggle(e) {
-      //console.log(e);
       for (let i = 0; i < this.panels.length; i++) {
-          const element = this.panels[i];
-          if(element.id==e){
-              element.state=true
-          }else{
-              element.state=false
-          }
+        const element = this.panels[i];
+        if (element.id == e) {
+          element.state = true;
+        } else {
+          element.state = false;
+        }
       }
     },
     getPanels() {
@@ -107,10 +100,14 @@ export default {
         content: "contenido 3",
         state: false
       });
+    },
+    getAttributes() {
+      this.dataAttributes = JSON.stringify(this.dataAttributes);
     }
   },
   mounted() {
     this.getPanels();
+    this.getAttributes();
   }
 };
 </script>
