@@ -1,4 +1,16 @@
 <style lang="stylus" scoped>
+ul {
+  display: block;
+  list-style-type: none;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0px;
+}
+
+
+
 .navbar {
   overflow: hidden;
   background-color: #333;
@@ -61,21 +73,38 @@
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
+@media screen and (max-width: 600px) {
+
+  ul li {
+    width: 100%;
+  }
+  ul li a{
+    width 100%
+  }
+  .dropdown-content {
+    position relative
+    width 90%
+    min-width 0
+    margin-left 0px
+  }
+}
 </style>
 <template lang="pug">
 .navbar(:data-attributes="dataAttributes")
     .items
-        a.item(
+        ul
+          li(
             v-for="item in items", 
-            v-bind:class="{dropdown: item.children.length>0}",
-            :href="item.href"
-        ) {{item.title}}
-            i.fa.fa-caret-down(v-if="item.children.length>0")                
-            .dropdown-content(v-if="item.children.length>0")
-                a(
-                    v-for="children in item.children",
-                    :href="children.href"
-                ) {{children.title}}
+            v-bind:class="{dropdown: item.children!=null && item.children.length>0}"            
+          )
+            a.item(:href="item.href") {{item.title}}
+              i.fa.fa-caret-down(v-if="item.children!=null && item.children.length>0")                
+              ul.dropdown-content(v-if="item.children!=null && item.children.length>0")
+                li(
+                    v-for="children in item.children"
+                )
+                  a(:href="children.href") {{children.title}}
 </template>
 <script>
 export default {
@@ -114,12 +143,13 @@ export default {
       try {
         if (this.structure != null) {
           const jsonify = JSON.parse(this.structure);
-          if (jsonify != null && jsonify.structure.content) {
-            const arrData = jsonify.structure;
+          if (jsonify != null && jsonify.length > 0) {
+            const arrData = jsonify;
             for (let i = 0; i < arrData.length; i++) {
               const element = arrData[i];
-              this.slides.push(element);
+              this.items.push(element);
             }
+            console.table(this.items);
           }
         } else {
           /**
@@ -137,21 +167,21 @@ export default {
      */
     getDefaultItems() {
       this.items.push(
-        { id: 1, name: "Inicio", href: "#", children: [] },
+        { id: 1, title: "Inicio", href: "#", children: [] },
         {
           id: 2,
-          name: "Contacto",
+          title: "Contacto",
           href: "#",
-          children: [{ id: 1, name: "Proyecto 0", href: "#proyecto0" }]
+          children: [{ id: 1, title: "Proyecto 0", href: "#proyecto0" }]
         },
         {
           id: 3,
-          name: "Portafolio",
+          title: "Portafolio",
           href: "#",
           children: [
-            { id: 1, name: "Proyecto 1", href: "#proyecto1" },
-            { id: 2, name: "Proyecto 2", href: "#proyecto2" },
-            { id: 3, name: "Proyecto 3", href: "#proyecto3" }
+            { id: 1, title: "Proyecto 1", href: "#proyecto1" },
+            { id: 2, title: "Proyecto 2", href: "#proyecto2" },
+            { id: 3, title: "Proyecto 3", href: "#proyecto3" }
           ]
         }
       );
@@ -166,8 +196,8 @@ export default {
     }
   },
   mounted() {
-    this.getData();
-    this.getAttributes();
+    this.getItems();
+    //this.getAttributes();
   }
 };
 </script>
