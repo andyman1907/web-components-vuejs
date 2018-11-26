@@ -15,6 +15,7 @@ body {
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  border-radius: 5px;
 }
 
 /* Modal Content */
@@ -22,14 +23,46 @@ body {
   position: relative;
   background-color: #fefefe;
   margin: auto;
-  padding: 0;
-  border: 1px solid #888;
+  padding: 0;  
   width: 80%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
   animation-name: animatetop;
   animation-duration: 0.4s;
+  border-radius: 5px;
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+  min-height: 30px;
+}
+
+.modal-body {
+  padding: 10px;
+}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
 }
 
 /* Add Animation */
@@ -54,37 +87,6 @@ body {
     opacity: 1;
   }
 }
-
-/* The Close Button */
-.close {
-  color: white;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.modal-header {
-  padding: 2px 16px;
-  background-color: #5cb85c;
-  color: white;
-}
-
-.modal-body {
-  padding: 2px 16px;
-}
-
-.modal-footer {
-  padding: 2px 16px;
-  background-color: #5cb85c;
-  color: white;
-}
 </style>
 <template lang="pug">
 .content(:data-attributes="dataAttributes")
@@ -92,10 +94,10 @@ body {
     .modal-content
       .modal-header
         span.close(@click="toggle(false)") &times;
-        h2 
-          slot(name="title")
+        h2
+          slot(name="title",v-if="title")
       .modal-body
-        .modal-body-content
+        .modal-body-content(v-if="content")
           slot(name="content")
       .modal-footer(v-if="footer")
         slot(name="footer")
@@ -106,10 +108,13 @@ body {
 <script>
 export default {
   name: "Modal",
-  props: ["title", "content", "footer"],
+  props: [],
   data() {
     return {
       state: false,
+      title: false,
+      content: false,
+      footer: false,
       dataAttributes: {
         slot: {
           title: "string",
@@ -129,11 +134,16 @@ export default {
       }
     },
     getAttributes() {
-      console.log(JSON.stringify(this.dataAttributes));
-      this.dataAttributes = JSON.stringify({name:"string",content:"string"});
+      this.dataAttributes = JSON.stringify(this.dataAttributes);
+    },
+    validSlots() {
+      this.title = this.$slots["title"] ? true : false;
+      this.content = this.$slots["content"] ? true : false;
+      this.footer = this.$slots["footer"] ? true : false;
     }
   },
-  mount() {
+  mounted() {
+    this.validSlots();
     this.getAttributes();
   }
 };

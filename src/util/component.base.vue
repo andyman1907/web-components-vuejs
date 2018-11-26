@@ -20,16 +20,18 @@ export default {
       },
       /**or to use attributes use this */
       dataAttributes: {
-        title: "string",
-        subtitle: "string",
-        content: [
-          {
-            id: "number",
-            title: "string",
-            content: "string",
-            state: "boolean"
-          }
-        ]
+        structure: {
+          title: "string",
+          subtitle: "string",
+          content: [
+            {
+              id: "number",
+              title: "string",
+              content: "string",
+              state: "boolean"
+            }
+          ]
+        }
       }
     };
   },
@@ -52,17 +54,18 @@ export default {
       try {
         if (this.structure != null) {
           const jsonify = JSON.parse(this.structure);
-          /*
-          if (jsonify != null && jsonify.content) {
-            jsonify.content.forEach(element => {
-              this.items.push(element);
-            });
+
+/*           if (jsonify != null && jsonify.structure.content) {
+            const arrData = jsonify.structure.content;
+            for (let i = 0; i < arrData.length; i++) {
+              const element = arrData[i];
+              this.slides.push(element);
+            }
           }
           this.buttonText =
             jsonify != null && jsonify.buttonText
               ? jsonify.buttonText
-              : this.defaultButtonText;
-              */
+              : this.defaultButtonText; */
         } else {
           /**
            * si no se definió una estrucutra correcta se genera una estructura inicial básica
@@ -74,7 +77,7 @@ export default {
       }
     },
     /**
-     * method to generate default render in case the structure that gives 
+     * method to generate default render in case the structure that gives
      * in the structure selector is invalid
      */
     getDefaultItems() {

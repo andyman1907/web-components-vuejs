@@ -23,8 +23,7 @@ body {
 <template lang="pug">
 #app
   //- Collapse(
-  //-   title="titulo con información",
-  //-   subtitle="subtitulo con información" 
+  //-   structure='{"structure":{"title":"collapse de test","content":[{"id":"1","title":"title 1","content":"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum libero suscipit distinctio, voluptatibus doloribus pariatur iure ducimus exercitationem neque reprehenderit, placeat repudiandae! At odio suscipit ea inventore. Officia, doloribus pariatur!","state":true},{"id":"2","title":"title 2","content":"lorem ipsun 2","state":false},{"id":"3","title":"title 3","content":"lorem ipsun 3","state":false},{"id":"4","title":"title 4","content":"lorem ipsun 4","state":false},{"id":"5","title":"title 5","content":"lorem ipsun 5","state":false}]}}'
   //-   )
   //- hr
   //- Card(
@@ -33,17 +32,17 @@ body {
   //-   url="https://www.sitepen.com/blog/wp-content/uploads/2018/05/mayhem19-600x315.png"
   //-   )
   //- hr
-  Carousell(
-
-  )
+  //- Carousell(
+  //-   structure="{\"structure\":{\"title\":\"carousell de test\",\"content\":[{\"id\":\"1\",\"url\":\"https://www.w3schools.com/howto/img_nature_wide.jpg\",\"text\":\"lorem 1\",\"state\":\"true\"},{\"id\":\"1\",\"url\":\"https://www.w3schools.com/howto/img_snow_wide.jpg\",\"text\":\"lorem 2\",\"state\":\"false\"},{\"id\":\"1\",\"url\":\"https://www.w3schools.com/howto/img_mountains_wide.jpg\",\"text\":\"lorem 3\",\"state\":\"false\"}]}}"
+  //- )
   //- hr
-  //- Modal
-  //-   div(slot="title") titulo de prueba
-  //-   div(slot="buttonText") Abrir modal
-  //-   div(slot="content") Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti temporibus placeat magni magnam nisi hic sunt tempore rerum, voluptatum aliquam illo consectetur dolor! Provident, voluptatem soluta ut eum consectetur molestiae?
-  //-   div(slot="footer")
-  //-     p Ipsum molestias accusantium nam maxime ipsa commodi nostrum corporis ex suscipit accusamus aliquam tempora quasi non quos, fugiat aliquid pariatur aspernatur aperiam. Hic ea quod voluptates vero placeat eaque labore.
-  //- hr
+  Modal
+    //-div(slot="title") titulo de prueba    
+    div(slot="content") Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti temporibus placeat magni magnam nisi hic sunt tempore rerum, voluptatum aliquam illo consectetur dolor! Provident, voluptatem soluta ut eum consectetur molestiae?
+    div(slot="footer")
+      p Ipsum molestias accusantium nam maxime ipsa commodi nostrum corporis ex suscipit accusamus aliquam tempora quasi non quos, fugiat aliquid pariatur aspernatur aperiam. Hic ea quod voluptates vero placeat eaque labore.
+    div(slot="buttonText") Abrir modal
+  hr
   //- Sidenav(
   //-   structure="{\"buttonText\":\"abrir menú lateral\",\"content\":[{\"id\":1,\"title\":\"titulo de prueba 1\",\"href\":\"link de prueba 1\"},{\"id\":2,\"title\":\"titulo de prueba 2\",\"href\":\"link de prueba 2\"}]}"
   //- )
