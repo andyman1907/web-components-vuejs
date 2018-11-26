@@ -1,65 +1,65 @@
 <style lang="stylus" scoped>
 .navbar {
-    overflow: hidden;
-    background-color: #333;
-    font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
+  background-color: #333;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .navbar a {
-    float: left;
-    font-size: 16px;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
 .dropdown {
-    float: left;
-    overflow: hidden;
+  float: left;
+  overflow: hidden;
 }
 
 .dropdown .dropbtn {
-    font-size: 16px;
-    border: none;
-    outline: none;
-    color: white;
-    padding: 14px 16px;
-    background-color: inherit;
-    font-family: inherit;
-    margin: 0;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
 }
 
 .navbar a:hover, .dropdown:hover .dropbtn {
-    background-color: red;
+  background-color: red;
 }
 
 .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    margin-left: -17px;
-    margin-top: 15px;
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  margin-left: -17px;
+  margin-top: 15px;
 }
 
 .dropdown-content a {
-    float: none;
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
 }
 
 .dropdown-content a:hover {
-    background-color: #ddd;
+  background-color: #ddd;
 }
 
 .dropdown:hover .dropdown-content {
-    display: block;
+  display: block;
 }
 </style>
 <template lang="pug">
@@ -80,7 +80,7 @@
 <script>
 export default {
   name: "NavbarDropdown",
-  props: ["title", "src", "description"],
+  props: ["structure"],
   data() {
     return {
       state: true,
@@ -104,7 +104,38 @@ export default {
   },
   methods: {
     toggle() {},
-    getData() {
+    /**
+     * method that turns the json of the selector structure to object to
+     * render correctly it has all the validations to render, if the structure is
+     * not valid it will generate a default structure
+     * método que se encarga de convertir un atributo structure
+     */
+    getItems() {
+      try {
+        if (this.structure != null) {
+          const jsonify = JSON.parse(this.structure);
+          if (jsonify != null && jsonify.structure.content) {
+            const arrData = jsonify.structure;
+            for (let i = 0; i < arrData.length; i++) {
+              const element = arrData[i];
+              this.slides.push(element);
+            }
+          }
+        } else {
+          /**
+           * si no se definió una estrucutra correcta se genera una estructura inicial básica
+           */
+          this.getDefaultItems();
+        }
+      } catch (error) {
+        this.getDefaultItems();
+      }
+    },
+    /**
+     * method to generate default render in case the structure that gives
+     * in the structure selector is invalid
+     */
+    getDefaultItems() {
       this.items.push(
         { id: 1, name: "Inicio", href: "#", children: [] },
         {
@@ -125,6 +156,11 @@ export default {
         }
       );
     },
+    /**
+     * method that turns the attributes of the component in JSON to have
+     * the structure that the components needs to render correctly, this data
+     * will be in the selector data-attributes
+     */
     getAttributes() {
       this.dataAttributes = JSON.stringify(this.dataAttributes);
     }

@@ -36,13 +36,13 @@ body {
   //-   structure="{\"structure\":{\"title\":\"carousell de test\",\"content\":[{\"id\":\"1\",\"url\":\"https://www.w3schools.com/howto/img_nature_wide.jpg\",\"text\":\"lorem 1\",\"state\":\"true\"},{\"id\":\"1\",\"url\":\"https://www.w3schools.com/howto/img_snow_wide.jpg\",\"text\":\"lorem 2\",\"state\":\"false\"},{\"id\":\"1\",\"url\":\"https://www.w3schools.com/howto/img_mountains_wide.jpg\",\"text\":\"lorem 3\",\"state\":\"false\"}]}}"
   //- )
   //- hr
-  Modal
-    //-div(slot="title") titulo de prueba    
-    div(slot="content") Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti temporibus placeat magni magnam nisi hic sunt tempore rerum, voluptatum aliquam illo consectetur dolor! Provident, voluptatem soluta ut eum consectetur molestiae?
-    div(slot="footer")
-      p Ipsum molestias accusantium nam maxime ipsa commodi nostrum corporis ex suscipit accusamus aliquam tempora quasi non quos, fugiat aliquid pariatur aspernatur aperiam. Hic ea quod voluptates vero placeat eaque labore.
-    div(slot="buttonText") Abrir modal
-  hr
+  //- Modal
+  //-   //-div(slot="title") titulo de prueba    
+  //-   div(slot="content") Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti temporibus placeat magni magnam nisi hic sunt tempore rerum, voluptatum aliquam illo consectetur dolor! Provident, voluptatem soluta ut eum consectetur molestiae?
+  //-   div(slot="footer")
+  //-     p Ipsum molestias accusantium nam maxime ipsa commodi nostrum corporis ex suscipit accusamus aliquam tempora quasi non quos, fugiat aliquid pariatur aspernatur aperiam. Hic ea quod voluptates vero placeat eaque labore.
+  //-   div(slot="buttonText") Abrir modal
+  //- hr
   //- Sidenav(
   //-   structure="{\"buttonText\":\"abrir menú lateral\",\"content\":[{\"id\":1,\"title\":\"titulo de prueba 1\",\"href\":\"link de prueba 1\"},{\"id\":2,\"title\":\"titulo de prueba 2\",\"href\":\"link de prueba 2\"}]}"
   //- )
@@ -61,7 +61,9 @@ body {
   //-               <p>Omnis repudiandae, eos consequuntur quia, aperiam vitae tenetur dignissimos nam itaque adipisci velit iusto animi pariatur ab vel incidunt delectus totam quod consectetur laborum nostrum sequi facere. Qui, itaque sunt.</p>
   //-               <p>Doloremque velit laboriosam, sunt perferendis culpa nesciunt placeat animi impedit, quas id nisi ducimus rerum ratione ea quae quia optio quod fugiat explicabo nostrum similique. Nobis tempore dolor voluptatem aspernatur.</p>`
   //- )
-  //- NavbarDropdown
+  NavbarDropdown(
+    structure='[{"id":"1","title":"titulo del menú 1","href":"#1"},{"id":"2","title":"titulo del menú 2","href":"#3","children":[{"id":"1","title":"titulo del submenú 1","href":"#21"},{"id":"2","title":"titulo del submenú 2","href":"#22"}]},{"id":"3","title":"titulo del menú 3","href":"#3"}]'
+  )
   //- Grid
   //-   div(slot="one")     
   //-     Card(
