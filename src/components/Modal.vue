@@ -95,14 +95,14 @@ body {
       .modal-header
         span.close(@click="toggle(false)") &times;
         h2
-          slot(name="title",v-if="title")
+          slot(name="title") title of test
       .modal-body
-        .modal-body-content(v-if="content")
-          slot(name="content")
-      .modal-footer(v-if="footer")
-        slot(name="footer")
+        .modal-body-content
+          slot(name="content") content of test
+      .modal-footer
+        slot(name="footer") footer of test
   button.button(@click="toggle(true)") 
-    slot(name="buttonText")
+    slot(name="buttonText") open
 </template>
 
 <script>

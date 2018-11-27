@@ -14,9 +14,9 @@ import Grid from './components/Grid.vue';
 
 Vue.config.productionTip = false
 
-new Vue({
+/* new Vue({
   render: h => h(App),
-}).$mount('#app');
+}).$mount('#app'); */
 
 const CollapseElement = wrap(Vue, Collapse);
 window.customElements.define('my-custom-collapse', CollapseElement);

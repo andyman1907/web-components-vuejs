@@ -30,16 +30,27 @@ img {
 export default {
   name: "Card",
   components: {},
-  props: ["title", "content", "url"],
+  props: {
+    title: {
+      default: "Title of test"
+    },
+    content: {
+      default: "content of test"
+    },
+    url: {
+      default:
+        "https://www.sitepen.com/blog/wp-content/uploads/2018/05/mayhem19-600x315.png"
+    }
+  },
   data() {
     return {
-      dataAttributes: { title: "string", content: "string", url: "string" }
+      dataAttributes: { title: "string", content: "string", url: "string" },      
     };
   },
   methods: {
     getAttributes() {
       this.dataAttributes = JSON.stringify(this.dataAttributes);
-    }
+    }    
   },
   mounted() {
     this.getAttributes();

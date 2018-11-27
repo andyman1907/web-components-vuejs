@@ -121,12 +121,20 @@ export default {
         this.isActive = true;
       }
     },
+    /**
+     * method that turns the json of the selector structure to object to
+     * render correctly it has all the validations to render, if the structure is
+     * not valid it will generate a default structure
+     * método que se encarga de convertir un atributo structure
+     */
     getItems() {
       try {
         if (this.structure != null) {
           const jsonify = JSON.parse(this.structure);
-          if (jsonify != null && jsonify.content) {
-            jsonify.content.forEach(element => {
+          console.log(jsonify);
+          const arrData=jsonify.structure.content;
+          if (jsonify != null && arrData) {
+            arrData.forEach(element => {
               this.items.push(element);
             });
           }
