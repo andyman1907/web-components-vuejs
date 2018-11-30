@@ -1,14 +1,16 @@
 const path = require("path")
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack')
 
 module.exports = {
-    entry: path.resolve( "src/dashboard/index.js"),
+    entry: path.resolve("src/dashboard/index.js"),
     output: {
         //path: path.resolve(__dirname, "dist"),
         path: path.resolve("dist-dashboard"),
         filename: "bundle.js"
     },
     devServer: {
-        contentBase: path.join(__dirname, "dist-dashboard"),
+        contentBase: path.join("dist-dashboard"),
         // compress: true,
         port: 9000,
         // after(app){
@@ -28,17 +30,67 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /(node_modules)/,
                 use: {
-                  loader: 'babel-loader'/* ,
+                    loader: 'babel-loader'/* ,
                   options: {
                     presets: ['es2015']
                   } */
                 }
             },
             {
-                //que tipos de archivos quiero reconocer
-                test: /\.css$/,
-                use: ["style-loader", "css-loader"]
+                // test: que tipo de archivo quiero reconocer,
+                // use: que loader se va a encargar del archivo
+                test: /\.styl$/,
+                use: ExtractTextPlugin.extract({
+                    // ['style-loader','css-loader']
+                    // fallback: 'style-loader',
+                    use: [
+                        "css-loader",
+                        {
+                            loader: 'stylus-loader',
+                            options: {
+                                use: [
+                                    require('nib'),
+                                    require('rupture')
+                                ],
+                                import: [
+                                    '~nib/lib/nib/index.styl',
+                                    '~rupture/rupture/index.styl'
+                                ]
+                            }
+                        }
+                    ]
+                }),
+            },
+            {
+                test: /\.(png|jpg|gif|woff|eot|ttf|svg)$/,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 100000
+                        }
+                    }
+                ]
             }
         ]
+    },
+    plugins: [
+         new ExtractTextPlugin("styles.css")
+        //new ExtractTextPlugin("css/[name].css"),
+        // new webpack.DllReferencePlugin({
+        //     manifest: require('./modules-manifest.json')
+        // })
+    ],
+    optimization: {
+        // splitChunks: {
+        //     cacheGroups: {
+        //         vendor: {
+        //             chunks: 'initial',
+        //             name: 'vendor',
+        //             test: 'vendor',
+        //             enforce: true
+        //         }
+        //     }
+        // }
     }
 }

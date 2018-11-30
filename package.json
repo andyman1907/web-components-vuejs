@@ -7,7 +7,8 @@
     "build": "vue-cli-service build",
     "builde": "vue-cli-service build --target wc --name my-custom-element ./src/main.js",
     "lint": "vue-cli-service lint",
-    "build:dashboard": "webpack --config ./src/dashboard/config/webpack.config.js"
+    "build:dashboard": "webpack --config ./src/dashboard/config/webpack.config.js",
+    "serve:dashboard": "webpack-dev-server --config ./src/dashboard/config/webpack.config.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -27,6 +28,7 @@
     "css-loader": "^1.0.1",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0-0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^2.0.0",
     "nib": "^1.1.2",
     "rupture": "^0.7.1",
