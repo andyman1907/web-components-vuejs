@@ -7,4 +7,14 @@ import './shared/css/app.styl';
 // renderToDOM(makeMessage(firstMessage));
 // delayedMessage();
 
-console.log("ssss");
+async function loadComponents() {
+    try {
+        const response = await home.getListComponent();        
+        response.data.forEach(element => {
+            console.log(element);
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+loadComponents();

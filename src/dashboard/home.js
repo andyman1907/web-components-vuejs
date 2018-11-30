@@ -1,9 +1,11 @@
 const axios = require("axios");
 
-module.exports = {
+let home = {
     getListComponent: async () => {
-        const data = await axios.get("http://localhost:9000/js/components.json");
+        const data = await axios.get("js/components.json");
         return data;
     },
-    getListComponent:"hellos"
+    getListComponentx: "hellos"
 }
+
+export {home}

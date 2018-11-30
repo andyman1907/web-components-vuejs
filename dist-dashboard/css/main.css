@@ -1,0 +1,15 @@
+body {
+  background: #ccc;
+  padding: 10px;
+}
+#main {
+  padding: 10px;
+  background: #fff;
+  border-radius: 5px;
+  -webkit-animation: 2;
+}
+@media only screen and (max-width: 400px) {
+  #main {
+    background: #f00;
+  }
+}

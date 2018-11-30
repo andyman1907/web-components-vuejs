@@ -7,11 +7,11 @@ module.exports = {
     output: {
         //path: path.resolve(__dirname, "dist"),
         path: path.resolve("dist-dashboard"),
-        filename: "bundle.js"
+        filename: "js/bundle.js"
     },
     devServer: {
         contentBase: path.join("dist-dashboard"),
-        // compress: true,
+        compress: true,
         port: 9000,
         // after(app){
         //   console.log('======== after ==========')
@@ -75,8 +75,8 @@ module.exports = {
         ]
     },
     plugins: [
-         new ExtractTextPlugin("styles.css")
-        //new ExtractTextPlugin("css/[name].css"),
+        // new ExtractTextPlugin("css/styles.css")
+        new ExtractTextPlugin("css/[name].css"),
         // new webpack.DllReferencePlugin({
         //     manifest: require('./modules-manifest.json')
         // })
