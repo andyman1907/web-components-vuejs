@@ -3,11 +3,12 @@ const path = require("path")
 module.exports = {
     entry: path.resolve( "src/dashboard/index.js"),
     output: {
-        path: path.resolve(__dirname, "dist"),
+        //path: path.resolve(__dirname, "dist"),
+        path: path.resolve("dist-dashboard"),
         filename: "bundle.js"
     },
     devServer: {
-        contentBase: path.join(__dirname, "dist"),
+        contentBase: path.join(__dirname, "dist-dashboard"),
         // compress: true,
         port: 9000,
         // after(app){
@@ -27,10 +28,10 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /(node_modules)/,
                 use: {
-                  loader: 'babel-loader',
+                  loader: 'babel-loader'/* ,
                   options: {
                     presets: ['es2015']
-                  }
+                  } */
                 }
             },
             {
