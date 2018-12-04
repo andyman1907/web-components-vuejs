@@ -8,8 +8,6 @@ body {
   border-radius: 5px;
   -webkit-animation: 2;
 }
-@media only screen and (max-width: 400px) {
-  #main {
-    background: #f00;
-  }
+.fono >div {
+  display: block;
 }
