@@ -19,18 +19,22 @@ img {
 
 <template lang="pug">
     .card(:data-attributes="dataAttributes")
-      img(:src="url", alt="Avatar", style="width:100%")
+      slot(name="image")
+        img(:src="url", alt="Avatar", style="width:100%")      
       .container
         h4
-          b {{title}}
-        p {{content}}    
+          slot(name="title") 
+            b title of test
+        .content 
+          slot(name="content") 
+            p content of test
 
 </template>
 <script>
 export default {
   name: "Card",
   components: {},
-  props: {
+  props: [] /* {
     title: {
       default: "Title of test"
     },
@@ -40,17 +44,24 @@ export default {
     url: {
       default:
         "https://www.sitepen.com/blog/wp-content/uploads/2018/05/mayhem19-600x315.png"
-    }
-  },
+    } 
+  },*/,
   data() {
     return {
-      dataAttributes: { title: "string", content: "string", url: "string" },      
+      // dataAttributes: { title: "string", content: "string", url: "string" },
+      dataAttributes: {
+        slot: {
+          image: "",
+          title: "string",
+          content: "string"
+        }
+      }
     };
   },
   methods: {
     getAttributes() {
       this.dataAttributes = JSON.stringify(this.dataAttributes);
-    }    
+    }
   },
   mounted() {
     this.getAttributes();

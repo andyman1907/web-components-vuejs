@@ -37,6 +37,16 @@ module.exports = {
                 }
             },
             {
+                //que tipos de archivos quiero reconocer
+                test: /\.html$/,                
+                use: {
+                    loader: 'html-loader'/* ,
+                  options: {
+                    presets: ['es2015']
+                  } */
+                }
+            },
+            {
                 // test: que tipo de archivo quiero reconocer,
                 // use: que loader se va a encargar del archivo
                 test: /\.styl$/,
