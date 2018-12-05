@@ -8,7 +8,8 @@
     "builde": "vue-cli-service build --target wc --name my-custom-element ./src/main.js",
     "lint": "vue-cli-service lint",
     "build:dashboard": "webpack --config ./src/dashboard/config/webpack.config.js --watch",
-    "serve:dashboard": "webpack-dev-server --config ./src/dashboard/config/webpack.config.js"
+    "serve:dashboard": "webpack-dev-server --config ./src/dashboard/config/webpack.config.js",
+    "deploy:githubpages": "git subtree push --prefix dist origin gh-pages"
   },
   "dependencies": {
     "axios": "^0.18.0",
