@@ -38,7 +38,7 @@ module.exports = {
             },
             {
                 //que tipos de archivos quiero reconocer
-                test: /\.html$/,                
+                test: /\.html$/,
                 use: {
                     loader: 'html-loader'/* ,
                   options: {
@@ -70,6 +70,16 @@ module.exports = {
                         }
                     ]
                 }),
+            },
+            {
+                test: /\.scss$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        'css-loader',
+                        'sass-loader'
+                    ]
+                })
             },
             {
                 test: /\.(png|jpg|gif|woff|eot|ttf|svg)$/,

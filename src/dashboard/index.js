@@ -2,6 +2,9 @@ import { response } from "./components/handleComponents";
 
 
 import './shared/css/app.styl';
+//import './shared/css/app.scss';
+require("materialize-loader");
+
 // import makeMessage from './make-message.js';
 // import renderToDOM from './render-to-dom';
 // import { firstMessage, delayedMessage } from './messages.js';

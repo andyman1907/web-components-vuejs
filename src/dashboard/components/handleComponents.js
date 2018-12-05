@@ -46,18 +46,25 @@ let response = {
                     // htmlElement.appendChild(slotImage)
 
                     // html.appendChild(htmlElement);
+                    // html += `
+                    // <my-custom-card data-action='selectable'
+                    // data-item-name="${element.name}" 
+                    // ${structure} 
+                    // >
+                    // <div slot="title">${element.name}</div>
+                    // <div slot="content"><button  >escoger</button></div>
+                    // <div slot="image"><img src="https://ingenieroandresmora.com/proyectos/web-components/img/select.png" /></div>
+                    // </my-custom-card/>`;
                     html += `
-                    <my-custom-card data-action='selectable'
+                    <a data-action='selectable' class="col s6  button is-one-quarter" href="#"
                     data-item-name="${element.name}" 
                     ${structure} 
-                    >
-                    <div slot="title">${element.name}</div>
-                    <div slot="content"><button  >escoger</button></div>
-                    <div slot="image"><img src="https://ingenieroandresmora.com/proyectos/web-components/img/select.png" /></div>
-                    </my-custom-card/>`;
+                    >${element.name}
+                    <a/>`;
 
                 });
             }
+            html =`<div class="row">${html}</div>`
             return html;
         } catch (error) {
             errorHandle.doCatch(error);
@@ -69,6 +76,11 @@ let response = {
             for (var i = 0; i < selectors.length; i++) {
                 selectors[i].addEventListener("click", (e) => selectable(e))
             }
+            document.addEventListener("click",function(ev){
+                //if(ev.target)
+                ev.preventDefault();
+                console.log(ev.target);
+            })
         } catch (error) {
             errorHandle.doCatch(error);
         }
