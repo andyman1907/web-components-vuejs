@@ -28,11 +28,6 @@ async function render() {
         container.innerHTML = await response.getComponents();
         main.appendChild(container);
         response.inspect();
-        // const r = await response.getComponents();
-        // console.log(r);
-        // container.appendChild(r)
-        // main.appendChild(container);
-        // response.inspect();
     } catch (error) {
         console.log(error);
     }

@@ -1,4 +1,5 @@
-<style scoped>
+<style lang="scss" scoped>
+@import "~materialize-css/sass/materialize.scss";
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
@@ -11,6 +12,7 @@
 }
 img {
   border-radius: 5px 5px 0 0;
+  width: 100%;
 }
 .container {
   padding: 2px 16px;
@@ -20,7 +22,7 @@ img {
 <template lang="pug">
     .card(:data-attributes="dataAttributes")
       slot(name="image")
-        img(:src="url", alt="Avatar", style="width:100%")      
+        img(src="https://www.sitepen.com/blog/wp-content/uploads/2018/05/mayhem19-600x315.png", alt="Avatar", style="width:100%")      
       .container
         h4
           slot(name="title") 
@@ -28,6 +30,7 @@ img {
         .content 
           slot(name="content") 
             p content of test
+        .btn hola mundo
 
 </template>
 <script>

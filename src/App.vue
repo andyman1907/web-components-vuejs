@@ -26,13 +26,14 @@ body {
   //-   structure='{"structure":{"title":"collapse de test","content":[{"id":"1","title":"title 1","content":"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum libero suscipit distinctio, voluptatibus doloribus pariatur iure ducimus exercitationem neque reprehenderit, placeat repudiandae! At odio suscipit ea inventore. Officia, doloribus pariatur!","state":true},{"id":"2","title":"title 2","content":"lorem ipsun 2","state":false},{"id":"3","title":"title 3","content":"lorem ipsun 3","state":false},{"id":"4","title":"title 4","content":"lorem ipsun 4","state":false},{"id":"5","title":"title 5","content":"lorem ipsun 5","state":false}]}}'
   //-   )
   //- hr
-  //- Card(
-  //-   title="titulo con información", 
-  //-   subtitle="subtitulo con información",
-  //-   url="https://www.sitepen.com/blog/wp-content/uploads/2018/05/mayhem19-600x315.png"
-  //- )
+  //- Card
+  //-   div(slot="title") titulo con información    
+  //-   div(slot="subtitle") subtitulo con información
+  //-   div(slot="image") 
+  //-     img(src="https://www.sitepen.com/blog/wp-content/uploads/2018/05/mayhem19-600x315.png")
   //- hr
-  //- Carousell(
+  Carousell 
+  //-(
   //-   structure="{\"structure\":{\"title\":\"carousell de test\",\"content\":[{\"id\":\"1\",\"url\":\"https://www.w3schools.com/howto/img_nature_wide.jpg\",\"text\":\"lorem 1\",\"state\":\"true\"},{\"id\":\"1\",\"url\":\"https://www.w3schools.com/howto/img_snow_wide.jpg\",\"text\":\"lorem 2\",\"state\":\"false\"},{\"id\":\"1\",\"url\":\"https://www.w3schools.com/howto/img_mountains_wide.jpg\",\"text\":\"lorem 3\",\"state\":\"false\"}]}}"
   //- )
   //- hr
@@ -48,7 +49,7 @@ body {
   //- )
   //- hr
   //- Tabs(structure='{"structure":[{"id":"1","title":"titulo de prueba","content":"lorem 1","state":"true"},{"id":"2","title":"titulo de prueba 2","content":"lorem 2","state":"false"},{"id":"3","title":"titulo de prueba 3","content":"lorem 3","state":"false"}]}')
-  Video 
+  //-Video 
   //-(
   //-   title="Titulo de prueba",
   //-   src="https://www.youtube.com/embed/zbycB-Yetb0",
