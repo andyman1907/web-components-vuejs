@@ -76,10 +76,22 @@ let response = {
             for (var i = 0; i < selectors.length; i++) {
                 selectors[i].addEventListener("click", (e) => selectable(e))
             }
-            document.addEventListener("click",function(ev){
-                //if(ev.target)
+            document.addEventListener("click", function (ev) {
+                //if(ev.target.data)
                 ev.preventDefault();
-                console.log(ev.target);
+                if (ev.target.shadowRoot != null) {
+                    const findClickEvent = ev.target.shadowRoot.querySelectorAll("[data-clickevent]");
+                    if (findClickEvent != null && findClickEvent.length > 0) {
+                        let realMethod = '';
+                        findClickEvent.forEach(element => {
+                            realMethod=element.getAttribute("data-clickevent");
+                            //console.log(element.dataSet["data-click"])
+                        });
+                        realMethod();
+                    }
+                }
+                // console.log(ev.target.shadowRoot.querySelectorAll("[data-click]")[0]);
+                // console.log(ev.target.dataset);
             })
         } catch (error) {
             errorHandle.doCatch(error);
@@ -89,11 +101,10 @@ let response = {
 
 function selectable(event) {
     try {
-        console.log(1);
+
         const structure = (event.target.dataset.structure != null) ? "data-structure='" + JSON.stringify(event.target.dataset.structure) + "'" : '';
         const componentName = (event.target.dataset.itemName != null) ? event.target.dataset.itemName : null;
         if (structure != null && componentName != null) {
-            console.log(2);
             let body = '';
             switch (componentName) {
                 case "my-custom-card":
@@ -111,9 +122,9 @@ function selectable(event) {
                             <label>Descripción</label>
                             <textarea name="description" id="editor" cols="30" rows="10"></textarea>
                         </div>
-                        <div>                            
-                            <button>Guardar</button>
-                        </div>                        
+                        <div>
+                            <button onClick="doSave()">Guardar</button>
+                        </div>
                     </form>
                     `;
                     break;
@@ -131,17 +142,20 @@ function selectable(event) {
             </my-custom-modal>
             `;
             const main = document.getElementById("main");
-            main.innerHTML+=modal;
+            main.innerHTML += modal;
             setTimeout(() => {
-                //CKEDITOR.replace( 'editor' );  
+                //CKEDITOR.replace( 'editor' );
                 document.getElementById("selectorDashboard").click();
             }, 2000);
-            
+
         }
 
     } catch (error) {
         errorHandle.doCatch(error);
     }
+}
+function doSave() {
+    console.log(123456)
 }
 
 export { response }

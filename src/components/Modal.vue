@@ -140,6 +140,8 @@ export default {
       this.title = this.$slots["title"] ? true : false;
       this.content = this.$slots["content"] ? true : false;
       this.footer = this.$slots["footer"] ? true : false;
+    },doSave(){
+      console.log(123456)
     }
   },
   mounted() {
