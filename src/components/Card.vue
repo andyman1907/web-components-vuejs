@@ -25,12 +25,11 @@ img {
         img(src="https://www.sitepen.com/blog/wp-content/uploads/2018/05/mayhem19-600x315.png", alt="Avatar", style="width:100%")      
       .container
         h4
-          slot(name="title") 
+          slot(name="title")
             b title of test
-        .content 
-          slot(name="content") 
+        .content
+          slot(name="content")
             p content of test
-        .btn hola mundo
 
 </template>
 <script>
@@ -47,7 +46,7 @@ export default {
     url: {
       default:
         "https://www.sitepen.com/blog/wp-content/uploads/2018/05/mayhem19-600x315.png"
-    } 
+    }
   },*/,
   data() {
     return {

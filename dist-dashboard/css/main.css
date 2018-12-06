@@ -8,6 +8,12 @@ body {
   border-radius: 5px;
   -webkit-animation: 2;
 }
+#selected-items {
+  background: #fff;
+  padding: 5px;
+  border-radius: 5px;
+}
 .fono >div {
   display: block;
 }
+/* @import 'material-icons/iconfont/material-icons.scss'; */
