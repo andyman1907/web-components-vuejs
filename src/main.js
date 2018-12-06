@@ -10,13 +10,18 @@ import Tabs from './components/Tabs.vue';
 import Video from './components/Video.vue';
 import NavbarDropdown from './components/NavbarDropdown.vue';
 import Grid from './components/Grid.vue';
+import 'materialize-css/dist/js/materialize.min'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 
+//import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader
 
+Vue.use(Vuetify)
 Vue.config.productionTip = false
 
-/* new Vue({
-  render: h => h(App),
-}).$mount('#app'); */
+// new Vue({
+//   render: h => h(App),
+// }).$mount('#app');
 
 const CollapseElement = wrap(Vue, Collapse);
 window.customElements.define('my-custom-collapse', CollapseElement);

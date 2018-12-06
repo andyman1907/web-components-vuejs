@@ -61,10 +61,10 @@ let response = {
                     ${structure} 
                     >${element.name}
                     <a/>`;
-
+                    
                 });
             }
-            html = `<div class="row">${html}</div>`
+            html =`<div class="row">${html}</div>`;
             return html;
         } catch (error) {
             errorHandle.doCatch(error);
