@@ -1,6 +1,9 @@
 const axios = require("axios");
 import { errorHandle } from "./errorHandle";
-import { selectors as $ } from "./shared/util/selectors";
+import { selectors as $ } from "../shared/util/selectors";
+const uniqid = require('uniqid');
+const domRemove = require('dom-remove');
+
 
 let response = {
     getListComponent: async () => {
@@ -38,6 +41,35 @@ let response = {
             errorHandle.doCatch(error);
         }
     }
+}
+
+
+function activateLiveEvents() {
+    document.addEventListener("click", function (ev) {
+        try {
+            //if(ev.target.data)
+            ev.preventDefault();
+            // if (ev.target.shadowRoot != null) {
+            //     console.log(2);
+            //     const findClickEvent = ev.target.shadowRoot.$.all("[data-clickevent]");
+            //     if (findClickEvent != null && findClickEvent.length > 0) {
+            //         let realMethod = '';
+            //         findClickEvent.forEach(element => {
+            //             realMethod = element.getAttribute("data-clickevent");
+            //             //console.log(element.dataSet["data-click"])
+            //         });
+            //         realMethod();
+            //     }
+            // }
+            (ev.target.dataset["itemName"] != null) ? selectable(ev) : '';
+            handleDeleteThis(ev);
+            handleCloneThis(ev);
+            handleEditThis(ev);
+        } catch (error) {
+            errorHandle.doCatch(error)
+        }
+
+    })
 }
 
 function selectable(event) {
@@ -84,10 +116,9 @@ function selectable(event) {
             const component = {
                 name: componentName
             }
-            const main = $.$id("selected-items");
+            const main = $.id("selected-items");
             main.innerHTML += selectComponent(component);
-
-            ($.$id("selectorDashboard") != null) ? $.$id("selectorDashboard").click() : '';
+            //($.$id("#selectorDashboard") != null) ? $.q("#selectorDashboard").click() : '';
             // const $items = $all("[data-custom]");
             // if ($items.length > 0) {
             //     $items.forEach(element => {
@@ -107,6 +138,54 @@ function selectable(event) {
         errorHandle.doCatch(error);
     }
 }
+
+function handleDeleteThis(event) {
+    try {
+        const referency = event.target.dataset.deleteThis;
+        if (referency != null) {
+            const $el = $.id(referency);
+            domRemove($el);
+        }
+
+    } catch (error) {
+        errorHandle.doCatch(error);
+    }
+}
+
+function handleCloneThis(event) {
+    try {
+        const referency = event.target.dataset.cloneThis;
+        if (referency != null) {
+            const $el = $.id(referency);
+            const $clone = $el.cloneNode(true);
+            $el.parentNode.appendChild($clone);
+        }
+
+    } catch (error) {
+        errorHandle.doCatch(error);
+    }
+}
+
+function handleEditThis(event) {
+    try {
+        const referency = event.target.dataset.editThis;
+        if (referency != null) {
+            const $el = $.id(referency);
+            // const $component_=$el;
+            // console.log($component);
+            // console.log($component_);
+            //console.info($el.__vue_custom_element__.$children[0].sayHello());
+            $.id("selected-items").innerHTML += $el.vueComponent.showForm();
+            //document.querySelector("my-custom-card").__vue_custom_element__.$children[0].sayHello();
+            //$el.__vue_custom_element__.sayHello();
+            //console.log($component.shadowRoot.querySelector("[data-attributes]").getAttribute("data-attributes"));
+        }
+
+    } catch (error) {
+        errorHandle.doCatch(error);
+    }
+}
+
 function doSave() {
     console.log(123456)
 }
@@ -162,18 +241,22 @@ function menuComponents(element) {
 function selectComponent(element) {
     let response = ''
     try {
-        response = `
-        <div >
+        const uniqid_ = uniqid();
+        const dropid_ = uniqid();
+        const compId = uniqid();
+        response = `        
+            <div id="${uniqid_}">
                 <p>
-                    <a href="#" class="dropdown-trigger btn" data-target='dropdown1' data-custom="item">custom</a>
+                    <a href="#" class="dropdown-trigger btn" data-target='${dropid_}' data-custom="item">custom</a>
                 </p>
-                <ul id='dropdown1' class='dropdown-content'>
-                  <li><a href="#!">Editar</a></li>
-                  <li><a href="#!">Duplicar</a></li>
-                  <li><a href="#!">Eliminar</a></li>
+                <ul id='${dropid_}' class='dropdown-content'>
+                  <li><a href="#!" data-edit-this="${compId}">Editar</a></li>
+                  <li><a href="#!" data-clone-this="${uniqid_}">Duplicar</a></li>
+                  <li><a href="#!" data-delete-this="${uniqid_}">Eliminar</a></li>
                 </ul>
-                <${element.name} data-item="${element.name}"></${element.name}>
+                <${element.name} id="${compId}" data-component-item="${element.name}"></${element.name}>
             </div>
+            
         `
     } catch (error) {
         errorHandle.doCatch(error);
@@ -187,32 +270,5 @@ function activateMaterial() {
     var instances = M.Dropdown.init(elems, options);
 }
 
-function activateLiveEvents() {
-    console.log('#########################--------------------##########################');
-    document.addEventListener("click", function (ev) {
-        //if(ev.target.data)
-        ev.preventDefault();
-        if (ev.target.shadowRoot != null) {
-            const findClickEvent = ev.target.shadowRoot.querySelectorAll("[data-clickevent]");
-            if (findClickEvent != null && findClickEvent.length > 0) {
-                let realMethod = '';
-                findClickEvent.forEach(element => {
-                    realMethod = element.getAttribute("data-clickevent");
-                    //console.log(element.dataSet["data-click"])
-                });
-                realMethod();
-            }
-        }
-        //const selectors = event.$all("[data-action]");
-        const selectors = ev.target.querySelectorAll("[data-action]");
-        console.log(ev.target);
-        console.log(selectors);
-        for (var i = 0; i < selectors.length; i++) {
-            selectors[i].addEventListener("click", (e) => selectable(e))
-        }
-        // console.log(ev.target.shadowRoot.querySelectorAll("[data-click]")[0]);
-        // console.log(ev.target.dataset);
-    })
-}
 
 export { response }

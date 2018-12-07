@@ -33,6 +33,7 @@ img {
 
 </template>
 <script>
+import * as templatez from "html-loader!./form.html"
 export default {
   name: "Card",
   components: {},
@@ -63,6 +64,10 @@ export default {
   methods: {
     getAttributes() {
       this.dataAttributes = JSON.stringify(this.dataAttributes);
+      console.log(templatez);
+    },
+    showForm(){
+      return templatez;
     }
   },
   mounted() {

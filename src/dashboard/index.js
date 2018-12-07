@@ -6,7 +6,7 @@ import { selectors as $ } from "./shared/util/selectors";
 
 async function render() {
     try {
-        const main = $.$id("main");
+        const main = $.id("main");
         const container = document.createElement("div");
         container.innerHTML = await response.getComponents();
         main.appendChild(container);
