@@ -2,16 +2,16 @@ body {
   background: #ccc;
   padding: 10px;
 }
-#main {
+#main,
+#selected-items,
+#form-items {
   padding: 10px;
   background: #fff;
   border-radius: 5px;
   -webkit-animation: 2;
 }
-#selected-items {
-  background: #fff;
-  padding: 5px;
-  border-radius: 5px;
+#form-items {
+  margin-top: 10px;
 }
 .fono >div {
   display: block;

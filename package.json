@@ -2,12 +2,22 @@
   "name": "vue-web-component-project",
   "version": "0.1.0",
   "private": true,
+  "watch": {
+    "run_vue": {
+      "patterns": [
+        "app"
+      ],
+      "extensions": "vue,html",
+      "quiet": false
+    }
+  },
   "scripts": {
     "serve:webcomponents": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build:webcomponents": "vue-cli-service build --target wc --name bundle-web-components ./src/main.js",
+    "build:webcomponents": "vue-cli-service build --target wc --name bundle-web-components ./src/main.js && gulp moveDistFile",
+    "watch:vueWebcomponents": "npm-watch & build:webcomponents",
     "lint": "vue-cli-service lint",
-    "serve:dashboard": "webpack --config webpack.config.js --watch",
+    "serve:dashboard": "webpack --config webpack.config.js --watch && gulp moveDistFile",
     "serve:dashboard:live": "webpack-dev-server --config ./src/dashboard/config/webpack.config.js",
     "deploy:githubpages": "git subtree push --prefix dist origin gh-pages"
   },
@@ -43,9 +53,13 @@
     "eslint-plugin-vue": "^5.0.0-0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^2.0.0",
+    "gulp": "^3.9.1",
+    "gulp-run-command": "0.0.9",
+    "gulp-watch": "^5.0.1",
     "html-loader": "^0.5.5",
     "nib": "^1.1.2",
     "node-sass": "^4.10.0",
+    "npm-watch": "^0.5.0",
     "rupture": "^0.7.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",

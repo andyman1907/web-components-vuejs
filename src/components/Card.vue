@@ -30,10 +30,9 @@ img {
         .content
           slot(name="content")
             p content of test
-
 </template>
 <script>
-import * as templatez from "html-loader!./form.html"
+import * as form from "html-loader!./CardForm.html";
 export default {
   name: "Card",
   components: {},
@@ -64,10 +63,9 @@ export default {
   methods: {
     getAttributes() {
       this.dataAttributes = JSON.stringify(this.dataAttributes);
-      console.log(templatez);
     },
-    showForm(){
-      return templatez;
+    showForm() {
+      return form;
     }
   },
   mounted() {

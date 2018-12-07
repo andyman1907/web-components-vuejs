@@ -1,6 +1,8 @@
 .DS_Store
 node_modules
 dist/
+dist-dashboard/js/bundle-dashboard.js
+dist-dashboard/js/bundle-web-components.min.js
 
 # local env files
 .env.local

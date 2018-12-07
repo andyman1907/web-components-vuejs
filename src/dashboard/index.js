@@ -11,7 +11,6 @@ async function render() {
         container.innerHTML = await response.getComponents();
         main.appendChild(container);
         response.inspect();
-
     } catch (error) {
         console.log(error);
     }
