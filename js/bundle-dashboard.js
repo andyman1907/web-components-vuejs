@@ -5151,6 +5151,9 @@ var es7_promise_finally = __webpack_require__(72);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.function.name.js
 var es6_function_name = __webpack_require__(73);
 
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
+var es6_regexp_replace = __webpack_require__(110);
+
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom.iterable.js
 var web_dom_iterable = __webpack_require__(74);
 
@@ -5177,6 +5180,7 @@ var selectors = {
 };
 
 // CONCATENATED MODULE: ./src/dashboard/components/handleComponents.js
+
 
 
 
@@ -5254,7 +5258,7 @@ var handleComponents_response = {
                   //const structure = (element.structure != null) ? "data-action='" + JSON.stringify(element.structure) + "'" : '';
                   var structure = element.structure != null ? "data-action='" + JSON.stringify(element.structure) + "'" : '';
                   element.structure = structure;
-                  html += menuComponents(element);
+                  html += handleComponents_response.menuComponents(element);
                 });
               }
 
@@ -5280,202 +5284,208 @@ var handleComponents_response = {
   }(),
   inspect: function inspect() {
     try {
-      activateLiveEvents();
+      handleComponents_response.activateLiveEvents();
     } catch (error) {
       errorHandle.doCatch(error);
     }
+  },
+  activateLiveEvents: function activateLiveEvents() {
+    document.addEventListener("click", function (ev) {
+      try {
+        //if(ev.target.data)
+        // if (ev.target.shadowRoot != null) {
+        //     console.log(2);
+        //     const findClickEvent = ev.target.shadowRoot.$.all("[data-clickevent]");
+        //     if (findClickEvent != null && findClickEvent.length > 0) {
+        //         let realMethod = '';
+        //         findClickEvent.forEach(element => {
+        //             realMethod = element.getAttribute("data-clickevent");
+        //             //console.log(element.dataSet["data-click"])
+        //         });
+        //         realMethod();
+        //     }
+        // }
+        ev.target.dataset["itemName"] != null ? handleComponents_response.selectable(ev) : '';
+        handleComponents_response.handleDeleteThis(ev);
+        handleComponents_response.handleCloneThis(ev);
+        handleComponents_response.handleEditThis(ev);
+      } catch (error) {
+        errorHandle.doCatch(error);
+      }
+    });
+    document.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+
+      try {
+        handleComponents_response.handleClick(ev);
+      } catch (error) {
+        errorHandle.doCatch(error);
+      }
+    });
+  },
+  selectable: function selectable(event) {
+    try {
+      var structure = event.target.dataset.structure != null ? "data-structure='" + JSON.stringify(event.target.dataset.structure) + "'" : '';
+      var componentName = event.target.dataset.itemName != null ? event.target.dataset.itemName : null;
+
+      if (structure != null && componentName != null) {
+        var body = '';
+
+        switch (componentName) {
+          case "my-custom-card":
+            body = "\n                        <form action=\"\" class=\"fono\" method=\"post\">\n                            <div>\n                                <label>Titulo</label>\n                                <input type=\"text\" name=\"title\" id=\"\">\n                            </div>\n                            <div>\n                                <label>Imagen</label>\n                                <input type=\"text\" name=\"url\" id=\"\">\n                            </div>\n                            <div>\n                                <label>Descripci\xF3n</label>\n                                <textarea name=\"description\" id=\"editor\" cols=\"30\" rows=\"10\"></textarea>\n                            </div>\n                            <div>\n                                <button onClick=\"doSave()\">Guardar</button>\n                            </div>\n                        </form>\n                        ";
+            break;
+
+          case "":
+            break;
+
+          default:
+            break;
+        } // const html = `
+        // <my-custom-modal id="selectorDashboard">
+        // <div slot="title">${componentName}</div>
+        // <div slot="content">${body}</div>
+        // </my-custom-modal>
+        // `;
+
+
+        var component = {
+          name: componentName
+        };
+        var main = selectors.id("selected-items");
+        main.innerHTML += handleComponents_response.selectComponent(component); //($.$id("#selectorDashboard") != null) ? $.q("#selectorDashboard").click() : '';
+        // const $items = $all("[data-custom]");
+        // if ($items.length > 0) {
+        //     $items.forEach(element => {
+        //         element.addEventListener("click", function (event) {
+        //             console.log(event);
+        //         })
+        //     });
+        // }
+        //console.log(items);
+        // $all("[data-custom]").addEventListener("click", function (event) {
+        //     console.log(event);
+        // });
+
+        handleComponents_response.activateMaterial();
+      }
+    } catch (error) {
+      errorHandle.doCatch(error);
+    }
+  },
+  handleDeleteThis: function handleDeleteThis(event) {
+    try {
+      var referency = event.target.dataset.deleteThis;
+
+      if (referency != null) {
+        var $el = selectors.id(referency);
+        domRemove($el);
+      }
+    } catch (error) {
+      errorHandle.doCatch(error);
+    }
+  },
+  handleCloneThis: function handleCloneThis(event) {
+    try {
+      var referency = event.target.dataset.cloneThis;
+
+      if (referency != null) {
+        var $el = selectors.id(referency);
+        var $clone = $el.cloneNode(true);
+        $el.parentNode.appendChild($clone);
+      }
+    } catch (error) {
+      errorHandle.doCatch(error);
+    }
+  },
+  handleEditThis: function handleEditThis(event) {
+    try {
+      var referency = event.target.dataset.editThis;
+
+      if (referency != null) {
+        var $el = selectors.id(referency);
+        selectors.id("form-items").insertAdjacentHTML('beforeend', $el.vueComponent.showForm().replace(/#target#/, referency));
+        M.AutoInit();
+      }
+    } catch (error) {
+      errorHandle.doCatch(error);
+    }
+  },
+  handleClick: function handleClick(event) {
+    try {
+      if (event.target.dataset.clickAction != null) {
+        var methodName = event.target.dataset.clickAction;
+        handleComponents_response[methodName](event);
+      }
+    } catch (error) {
+      errorHandle.doCatch(error);
+    }
+  },
+  doSave: function doSave() {
+    console.log(123456);
+  },
+  menuComponents: function menuComponents(element) {
+    var response = '';
+
+    try {
+      // const slotTitle=document.createElement("div")
+      // slotTitle.setAttribute("slot","title");
+      // slotTitle.innerHTML=element.name;
+      // const slotContent=document.createElement("div")
+      // slotContent.setAttribute("slot","title");
+      // slotContent.innerHTML=element.name;
+      // const slotImageContent=document.createElement("img")
+      // slotImageContent.setAttribute("src","https://ingenieroandresmora.com/proyectos/web-components/img/select.png");
+      // const slotImage=document.createElement("div")
+      // slotImage.setAttribute("slot","image");
+      // slotImage.appendChild(slotImageContent)                    
+      // const htmlElement = document.createElement("my-custom-card");
+      // htmlElement.setAttribute("data-action", "selectable");
+      // htmlElement.setAttribute("data-item-name", element.name);
+      // htmlElement.setAttribute("data-item-name", structure);
+      // htmlElement.appendChild(slotTitle)
+      // htmlElement.appendChild(slotContent)
+      // htmlElement.appendChild(slotImage)
+      // html.appendChild(htmlElement);
+      // html += `
+      // <my-custom-card data-action='selectable'
+      // data-item-name="${element.name}" 
+      // ${structure} 
+      // >
+      // <div slot="title">${element.name}</div>
+      // <div slot="content"><button  >escoger</button></div>
+      // <div slot="image"><img src="https://ingenieroandresmora.com/proyectos/web-components/img/select.png" /></div>
+      // </my-custom-card/>`;
+      response = "\n                        <a data-action='selectable' class=\"col s6  button is-one-quarter\" href=\"#\"\n                        data-item-name=\"".concat(element.name, "\"\n                        ").concat(element.structure, "\n                        >").concat(element.name, "\n                        <a/>");
+    } catch (error) {
+      errorHandle.doCatch(error);
+    }
+
+    return response;
+  },
+  selectComponent: function selectComponent(element) {
+    var response = '';
+
+    try {
+      var uniqid_ = uniqid();
+      var dropid_ = uniqid();
+      var compId = uniqid();
+      response = "        \n                <div id=\"".concat(uniqid_, "\">\n                    <p>\n                        <a href=\"#\" class=\"dropdown-trigger btn\" data-target='").concat(dropid_, "' data-custom=\"item\">custom</a>\n                    </p>\n                    <ul id='").concat(dropid_, "' class='dropdown-content'>\n                      <li><a href=\"#!\" data-edit-this=\"").concat(compId, "\">Editar</a></li>\n                      <li><a href=\"#!\" data-clone-this=\"").concat(uniqid_, "\">Duplicar</a></li>\n                      <li><a href=\"#!\" data-delete-this=\"").concat(uniqid_, "\">Eliminar</a></li>\n                    </ul>\n                    <").concat(element.name, " id=\"").concat(compId, "\" data-component-item=\"").concat(element.name, "\"></").concat(element.name, ">\n                </div>\n            ");
+    } catch (error) {
+      errorHandle.doCatch(error);
+    }
+
+    return response;
+  },
+  activateMaterial: function activateMaterial() {
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    var options = {};
+    var instances = M.Dropdown.init(elems, options);
+  },
+  doCard: function doCard(event) {
+    console.log(event);
   }
 };
-
-function activateLiveEvents() {
-  document.addEventListener("click", function (ev) {
-    try {
-      //if(ev.target.data)
-      ev.preventDefault(); // if (ev.target.shadowRoot != null) {
-      //     console.log(2);
-      //     const findClickEvent = ev.target.shadowRoot.$.all("[data-clickevent]");
-      //     if (findClickEvent != null && findClickEvent.length > 0) {
-      //         let realMethod = '';
-      //         findClickEvent.forEach(element => {
-      //             realMethod = element.getAttribute("data-clickevent");
-      //             //console.log(element.dataSet["data-click"])
-      //         });
-      //         realMethod();
-      //     }
-      // }
-
-      ev.target.dataset["itemName"] != null ? selectable(ev) : '';
-      handleDeleteThis(ev);
-      handleCloneThis(ev);
-      handleEditThis(ev);
-    } catch (error) {
-      errorHandle.doCatch(error);
-    }
-  });
-}
-
-function selectable(event) {
-  try {
-    var structure = event.target.dataset.structure != null ? "data-structure='" + JSON.stringify(event.target.dataset.structure) + "'" : '';
-    var componentName = event.target.dataset.itemName != null ? event.target.dataset.itemName : null;
-
-    if (structure != null && componentName != null) {
-      var body = '';
-
-      switch (componentName) {
-        case "my-custom-card":
-          body = "\n                    <form action=\"\" class=\"fono\" method=\"post\">\n                        <div>\n                            <label>Titulo</label>\n                            <input type=\"text\" name=\"title\" id=\"\">\n                        </div>\n                        <div>\n                            <label>Imagen</label>\n                            <input type=\"text\" name=\"url\" id=\"\">\n                        </div>\n                        <div>\n                            <label>Descripci\xF3n</label>\n                            <textarea name=\"description\" id=\"editor\" cols=\"30\" rows=\"10\"></textarea>\n                        </div>\n                        <div>\n                            <button onClick=\"doSave()\">Guardar</button>\n                        </div>\n                    </form>\n                    ";
-          break;
-
-        case "":
-          break;
-
-        default:
-          break;
-      } // const html = `
-      // <my-custom-modal id="selectorDashboard">
-      // <div slot="title">${componentName}</div>
-      // <div slot="content">${body}</div>
-      // </my-custom-modal>
-      // `;
-
-
-      var component = {
-        name: componentName
-      };
-      var main = selectors.id("selected-items");
-      main.innerHTML += selectComponent(component); //($.$id("#selectorDashboard") != null) ? $.q("#selectorDashboard").click() : '';
-      // const $items = $all("[data-custom]");
-      // if ($items.length > 0) {
-      //     $items.forEach(element => {
-      //         element.addEventListener("click", function (event) {
-      //             console.log(event);
-      //         })
-      //     });
-      // }
-      //console.log(items);
-      // $all("[data-custom]").addEventListener("click", function (event) {
-      //     console.log(event);
-      // });
-
-      activateMaterial();
-    }
-  } catch (error) {
-    errorHandle.doCatch(error);
-  }
-}
-
-function handleDeleteThis(event) {
-  try {
-    var referency = event.target.dataset.deleteThis;
-
-    if (referency != null) {
-      var $el = selectors.id(referency);
-      domRemove($el);
-    }
-  } catch (error) {
-    errorHandle.doCatch(error);
-  }
-}
-
-function handleCloneThis(event) {
-  try {
-    var referency = event.target.dataset.cloneThis;
-
-    if (referency != null) {
-      var $el = selectors.id(referency);
-      var $clone = $el.cloneNode(true);
-      $el.parentNode.appendChild($clone);
-    }
-  } catch (error) {
-    errorHandle.doCatch(error);
-  }
-}
-
-function handleEditThis(event) {
-  try {
-    var referency = event.target.dataset.editThis;
-
-    if (referency != null) {
-      var $el = selectors.id(referency); // const $component_=$el;
-      // console.log($component);
-      // console.log($component_);
-      //console.info($el.__vue_custom_element__.$children[0].sayHello());
-
-      selectors.id("selected-items").innerHTML += $el.vueComponent.showForm(); //document.querySelector("my-custom-card").__vue_custom_element__.$children[0].sayHello();
-      //$el.__vue_custom_element__.sayHello();
-      //console.log($component.shadowRoot.querySelector("[data-attributes]").getAttribute("data-attributes"));
-    }
-  } catch (error) {
-    errorHandle.doCatch(error);
-  }
-}
-
-function doSave() {
-  console.log(123456);
-}
-
-function menuComponents(element) {
-  var response = '';
-
-  try {
-    // const slotTitle=document.createElement("div")
-    // slotTitle.setAttribute("slot","title");
-    // slotTitle.innerHTML=element.name;
-    // const slotContent=document.createElement("div")
-    // slotContent.setAttribute("slot","title");
-    // slotContent.innerHTML=element.name;
-    // const slotImageContent=document.createElement("img")
-    // slotImageContent.setAttribute("src","https://ingenieroandresmora.com/proyectos/web-components/img/select.png");
-    // const slotImage=document.createElement("div")
-    // slotImage.setAttribute("slot","image");
-    // slotImage.appendChild(slotImageContent)                    
-    // const htmlElement = document.createElement("my-custom-card");
-    // htmlElement.setAttribute("data-action", "selectable");
-    // htmlElement.setAttribute("data-item-name", element.name);
-    // htmlElement.setAttribute("data-item-name", structure);
-    // htmlElement.appendChild(slotTitle)
-    // htmlElement.appendChild(slotContent)
-    // htmlElement.appendChild(slotImage)
-    // html.appendChild(htmlElement);
-    // html += `
-    // <my-custom-card data-action='selectable'
-    // data-item-name="${element.name}" 
-    // ${structure} 
-    // >
-    // <div slot="title">${element.name}</div>
-    // <div slot="content"><button  >escoger</button></div>
-    // <div slot="image"><img src="https://ingenieroandresmora.com/proyectos/web-components/img/select.png" /></div>
-    // </my-custom-card/>`;
-    response = "\n                    <a data-action='selectable' class=\"col s6  button is-one-quarter\" href=\"#\"\n                    data-item-name=\"".concat(element.name, "\"\n                    ").concat(element.structure, "\n                    >").concat(element.name, "\n                    <a/>");
-  } catch (error) {
-    errorHandle.doCatch(error);
-  }
-
-  return response;
-}
-
-function selectComponent(element) {
-  var response = '';
-
-  try {
-    var uniqid_ = uniqid();
-    var dropid_ = uniqid();
-    var compId = uniqid();
-    response = "        \n            <div id=\"".concat(uniqid_, "\">\n                <p>\n                    <a href=\"#\" class=\"dropdown-trigger btn\" data-target='").concat(dropid_, "' data-custom=\"item\">custom</a>\n                </p>\n                <ul id='").concat(dropid_, "' class='dropdown-content'>\n                  <li><a href=\"#!\" data-edit-this=\"").concat(compId, "\">Editar</a></li>\n                  <li><a href=\"#!\" data-clone-this=\"").concat(uniqid_, "\">Duplicar</a></li>\n                  <li><a href=\"#!\" data-delete-this=\"").concat(uniqid_, "\">Eliminar</a></li>\n                </ul>\n                <").concat(element.name, " id=\"").concat(compId, "\" data-component-item=\"").concat(element.name, "\"></").concat(element.name, ">\n            </div>\n            \n        ");
-  } catch (error) {
-    errorHandle.doCatch(error);
-  }
-
-  return response;
-}
-
-function activateMaterial() {
-  var elems = document.querySelectorAll('.dropdown-trigger');
-  var options = {};
-  var instances = M.Dropdown.init(elems, options);
-}
-
 
 // EXTERNAL MODULE: ./src/dashboard/shared/css/app.styl
 var app = __webpack_require__(107);
@@ -5550,6 +5560,60 @@ render();
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 109 */,
+/* 110 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// @@replace logic
+__webpack_require__(111)('replace', 2, function (defined, REPLACE, $replace) {
+  // 21.1.3.14 String.prototype.replace(searchValue, replaceValue)
+  return [function replace(searchValue, replaceValue) {
+    'use strict';
+    var O = defined(this);
+    var fn = searchValue == undefined ? undefined : searchValue[REPLACE];
+    return fn !== undefined
+      ? fn.call(searchValue, O, replaceValue)
+      : $replace.call(String(O), searchValue, replaceValue);
+  }, $replace];
+});
+
+
+/***/ }),
+/* 111 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var hide = __webpack_require__(5);
+var redefine = __webpack_require__(11);
+var fails = __webpack_require__(26);
+var defined = __webpack_require__(28);
+var wks = __webpack_require__(1);
+
+module.exports = function (KEY, length, exec) {
+  var SYMBOL = wks(KEY);
+  var fns = exec(defined, SYMBOL, ''[KEY]);
+  var strfn = fns[0];
+  var rxfn = fns[1];
+  if (fails(function () {
+    var O = {};
+    O[SYMBOL] = function () { return 7; };
+    return ''[KEY](O) != 7;
+  })) {
+    redefine(String.prototype, KEY, strfn);
+    hide(RegExp.prototype, SYMBOL, length == 2
+      // 21.2.5.8 RegExp.prototype[@@replace](string, replaceValue)
+      // 21.2.5.11 RegExp.prototype[@@split](string, limit)
+      ? function (string, arg) { return rxfn.call(string, this, arg); }
+      // 21.2.5.6 RegExp.prototype[@@match](string)
+      // 21.2.5.9 RegExp.prototype[@@search](string)
+      : function (string) { return rxfn.call(string, this); }
+    );
+  }
+};
+
 
 /***/ })
 /******/ ]);
