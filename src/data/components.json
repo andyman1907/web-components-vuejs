@@ -4,6 +4,7 @@
     },
     {
         "name": "my-custom-card",
+        "vueName":"Card",
         "structure": {
             "slot": {
                 "image": "url",
@@ -29,6 +30,7 @@
     },
     {
         "name": "my-custom-modal"
+
     },
     {
         "name": "my-custom-sidenav"
@@ -44,8 +46,5 @@
     },
     {
         "name": "my-custom-grid"
-    },
-    {
-        "name": "my-custom-dashboard"
     }
 ]

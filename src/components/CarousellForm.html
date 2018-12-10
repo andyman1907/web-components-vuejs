@@ -1,0 +1,31 @@
+<div class="row">
+    <form class="col s12" data-to-target="#target#" data-submit-action="doCard" onSubmit="false">
+        <div class="row">
+            <div class="input-field col s12">
+                <label for="title">Titulo</label>
+                <input type="text" name="title" class="validate">
+            </div>
+            <div class="dynamic-items">
+                <div class="item">
+                    <div class="input-field col s12">
+                        <label for="content">Descripción</label>
+                        <input type="text" name="content" class="validate">
+                    </div>
+                    <div class="input-field col s12">
+                        <label for="img">Url de la imagen</label>
+                        <input type="url" name="img" class="validate">
+                    </div>
+                    <div class="input-field col s12">
+                        <a class="btn-small" href="#">Duplicar</a>
+                        <a class="btn-small" href="#">Eliminar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="input-field col s12">
+                <button class="btn waves-effect waves-light" type="submit" name="action">Guardar
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

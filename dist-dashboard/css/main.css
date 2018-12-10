@@ -1,3 +1,4 @@
+/* @import 'material-icons/iconfont/material-icons.scss'; */
 body {
   background: #ccc;
   padding: 10px;
@@ -16,4 +17,3 @@ body {
 .fono >div {
   display: block;
 }
-/* @import 'material-icons/iconfont/material-icons.scss'; */

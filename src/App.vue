@@ -5,7 +5,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  /* margin-top: 60px; */
 }
 
 hr {
@@ -17,22 +17,24 @@ hr {
 
 body {
   margin: 0px;
+  background:#ccc;
 }
 </style>
 
 <template lang="pug">
 #app
+  //-Dashboard
   //- Collapse(
   //-   structure='{"structure":{"title":"collapse de test","content":[{"id":"1","title":"title 1","content":"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum libero suscipit distinctio, voluptatibus doloribus pariatur iure ducimus exercitationem neque reprehenderit, placeat repudiandae! At odio suscipit ea inventore. Officia, doloribus pariatur!","state":true},{"id":"2","title":"title 2","content":"lorem ipsun 2","state":false},{"id":"3","title":"title 3","content":"lorem ipsun 3","state":false},{"id":"4","title":"title 4","content":"lorem ipsun 4","state":false},{"id":"5","title":"title 5","content":"lorem ipsun 5","state":false}]}}'
   //-   )
   //- hr
-  Card
+  //-Card
   //-   div(slot="title") titulo con información    
   //-   div(slot="subtitle") subtitulo con información
   //-   div(slot="image") 
   //-     img(src="https://www.sitepen.com/blog/wp-content/uploads/2018/05/mayhem19-600x315.png")
   //- hr
-  Carousell 
+  //-Carousell 
   //-(
   //-   structure="{\"structure\":{\"title\":\"carousell de test\",\"content\":[{\"id\":\"1\",\"url\":\"https://www.w3schools.com/howto/img_nature_wide.jpg\",\"text\":\"lorem 1\",\"state\":\"true\"},{\"id\":\"1\",\"url\":\"https://www.w3schools.com/howto/img_snow_wide.jpg\",\"text\":\"lorem 2\",\"state\":\"false\"},{\"id\":\"1\",\"url\":\"https://www.w3schools.com/howto/img_mountains_wide.jpg\",\"text\":\"lorem 3\",\"state\":\"false\"}]}}"
   //- )
@@ -104,6 +106,7 @@ import Tabs from "./components/Tabs.vue";
 import Video from "./components/Video.vue";
 import NavbarDropdown from "./components/NavbarDropdown.vue";
 import Grid from "./components/Grid.vue";
+//import Dashboard from "./components/Dashboard.vue"
 
 export default {
   name: "app",
@@ -116,7 +119,8 @@ export default {
     Tabs,
     Video,
     NavbarDropdown,
-    Grid
+    Grid/* ,
+    Dashboard */
   }
 };
 </script>
