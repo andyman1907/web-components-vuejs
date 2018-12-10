@@ -44,5 +44,8 @@
     },
     {
         "name": "my-custom-grid"
+    },
+    {
+        "name": "my-custom-dashboard"
     }
 ]
