@@ -1,4 +1,3 @@
-/* @import 'material-icons/iconfont/material-icons.scss'; */
 body {
   background: #ccc;
   padding: 10px;
@@ -14,6 +13,18 @@ body {
 #form-items {
   margin-top: 10px;
 }
+#form-items .dynamic-items .item .clone-item {
+  display: none;
+}
+#form-items .dynamic-items .item .clone-item.active {
+  display: block;
+}
+#form-items .dynamic-items .item {
+  border: 2px solid #ccc;
+  padding: 10px;
+  margin-top: 10px;
+}
 .fono >div {
   display: block;
 }
+/* @import 'material-icons/iconfont/material-icons.scss'; */

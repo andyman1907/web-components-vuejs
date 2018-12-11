@@ -1,12 +1,15 @@
 <div class="row">
-    <form class="col s12" data-to-target="#target#" data-submit-action="doCard" onSubmit="false">
+    <form class="col s12" data-to-target="#target#" data-submit-action="doCarousell" onSubmit="false">
         <div class="row">
             <div class="input-field col s12">
                 <label for="title">Titulo</label>
                 <input type="text" name="title" class="validate">
             </div>
-            <div class="dynamic-items">
-                <div class="item">
+            <div class="col s12">
+                <h5>Items</h5>
+            </div>
+            <div class="col s12 dynamic-items">
+                <div class="item col s12">
                     <div class="input-field col s12">
                         <label for="content">Descripción</label>
                         <input type="text" name="content" class="validate">
@@ -15,9 +18,17 @@
                         <label for="img">Url de la imagen</label>
                         <input type="url" name="img" class="validate">
                     </div>
-                    <div class="input-field col s12">
-                        <a class="btn-small" href="#">Duplicar</a>
-                        <a class="btn-small" href="#">Eliminar</a>
+                    <div class="input-field col s12 hide">
+                        <p>
+                            <label>
+                                <input type="radio" name="state">
+                                <span>Elemento inicial</span>
+                            </label>
+                        </p>
+                    </div>
+                    <div class="input-field col s12 clone-item">
+                        <a class="btn-small" data-clone-item href="#">Duplicar</a>
+                        <a class="btn-small" data-remove-item href="#">Eliminar</a>
                     </div>
                 </div>
             </div>

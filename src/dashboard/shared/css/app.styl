@@ -8,9 +8,25 @@ body
     padding: 10px
     background: white
     border-radius: 5px
-    -webkit-animation: abs(2)
+    -webkit-animation: abs(2)       
+
+    // .dynamic-items [data-clone]:last-child
+    //     display: block
+
 #form-items
     margin-top 10px
+
+    .dynamic-items .item .clone-item
+        display:  none
+
+    .dynamic-items .item .clone-item.active
+        display block
+
+    .dynamic-items .item
+        border 2px solid #ccc
+        padding 10px
+        margin-top 10px
+
 
 +mobile()
         /* background: red */
