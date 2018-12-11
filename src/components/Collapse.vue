@@ -1,44 +1,45 @@
 <style scoped>
 .accordion {
-    background-color: #eee;
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 15px;
-    transition: 0.4s;
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
 }
 
-.active, .accordion:hover {
-    background-color: #ccc;
+.active,
+.accordion:hover {
+  background-color: #ccc;
 }
 
 .accordion:after {
-    content: '\002B';
-    color: #777;
-    font-weight: bold;
-    float: right;
-    margin-left: 5px;
+  content: "\002B";
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
 }
 
 .active:after {
-    content: "\2212";
+  content: "\2212";
 }
 
 .panel {
-    padding: 0 18px;
-    background-color: white;
-    border:1px solid #ccc;
-    border-top:0px;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
-    display: none;
-    border-radius:0px 0px 3px 3px;
+  padding: 0 18px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-top: 0px;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  display: none;
+  border-radius: 0px 0px 3px 3px;
 }
-.in {  
+.in {
   display: block;
 }
 </style>
@@ -50,9 +51,10 @@
         .content(v-for="panel in panels" v-bind:key="panel.id")
           button.accordion(@click="toggle(panel.id)") {{panel.title}}
           .panel(v-bind:class="{ in: panel.state==true }")
-            p {{panel.content}}            
+            p(v-html="panel.content")
 </template>
 <script>
+import * as form from "html-loader!./CollapseForm.html";
 export default {
   name: "Collapse",
   props: ["structure"],
@@ -98,6 +100,7 @@ export default {
      * método que se encarga de convertir un atributo structure
      */
     getItems() {
+      this.panels = [];
       try {
         //example json
         //{"structure":{"title":"carousell de test","content":[{"id":"1","title":"title 1","content":"lorem 1","state":true},{"id":"1","title":"title 2","content":"lorem 2","state":false},{"id":"1","title":"title 3","content":"lorem 3","state":false}]}}
@@ -166,6 +169,23 @@ export default {
      */
     getAttributes() {
       this.dataAttributes = JSON.stringify(this.dataAttributes);
+    },
+    /**
+     * method that turns the attributes of the component in JSON to have
+     * the structure that the components needs to render correctly, this data
+     * will be in the selector data-attributes
+     */
+    showDummy() {
+      return JSON.stringify({
+        structure: {
+          content: this.panels,
+          title: this.title,
+          subtitle: this.subtitle
+        }
+      });
+    },
+    showForm() {
+      return form;
     }
   },
   mounted() {

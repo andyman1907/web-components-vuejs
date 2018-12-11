@@ -2,10 +2,9 @@ import { messageHandle } from "./messageHandle";
 import { selectors as $ } from "../shared/util/selectors";
 let handleMaterialize = {
     activateMaterial() {
-        var elems = document.querySelectorAll('.dropdown-trigger');
-        let options = {}
-        var instances = M.Dropdown.init(elems, options);
-
+        var elems = document.querySelectorAll(".dropdown-trigger");
+        let options = {};
+        const instances = M.Dropdown.init(elems, options);
         M.AutoInit();
     },
     /**
@@ -16,12 +15,12 @@ let handleMaterialize = {
     validFillMaterialize() {
         setTimeout(() => {
             try {
-                $.id("form-items").querySelectorAll("input").forEach(t => (t.value != null && t.value != '') ? (t.parentNode.querySelector("label") != null) ? t.parentNode.querySelector("label").classList.add("active") : '' : '')
+                $.id("form-items").querySelectorAll("input,textarea").forEach(t => (t.value != null && t.value != '') ? (t.parentNode.querySelector("label") != null) ? t.parentNode.querySelector("label").classList.add("active") : '' : '')
             } catch (error) {
                 messageHandle.doCatch(error);
             }
         }, 1000);
     }
-}
+};
 
-export { handleMaterialize }
+export { handleMaterialize };

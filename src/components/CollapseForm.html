@@ -1,9 +1,13 @@
 <div class="row">
-    <form class="col s12" data-to-target="#target#" data-submit-action="doCarousell" onSubmit="false">
+    <form class="col s12" data-to-target="#target#" data-submit-action="doCollapse" onSubmit="false">
         <div class="row">
             <div class="input-field col s12">
                 <label for="title">Titulo</label>
                 <input type="text" name="title" class="validate">
+            </div>
+            <div class="input-field col s12">
+                <label for="title">Subtitulo</label>
+                <input type="text" name="subtitle" class="validate">
             </div>
             <div class="col s12">
                 <h5>Items</h5>
@@ -11,12 +15,12 @@
             <div class="col s12 dynamic-items">
                 <div class="item col s12">
                     <div class="input-field col s12">
-                        <label for="content">Descripción</label>
-                        <input type="text" name="content" class="validate" >
+                        <label for="title">Titulo</label>
+                        <input type="text" name="title" class="validate" required />
                     </div>
                     <div class="input-field col s12">
-                        <label for="img">Url de la imagen</label>
-                        <input type="url" name="img" class="validate" required />
+                        <label for="content">Contenido</label>
+                        <textarea name="content" class="materialize-textarea validate" required></textarea>
                     </div>
                     <div class="input-field col s12 hide">
                         <p>

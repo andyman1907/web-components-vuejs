@@ -164,11 +164,11 @@ export default {
      */
     getSlides() {
       this.active = false;
-      this.slides=[];
+      this.slides = [];
       try {
-        if (this.structure != null) {          
+        if (this.structure != null) {
           const jsonify = JSON.parse(this.structure);
-          if (jsonify != null && jsonify.structure.content) {            
+          if (jsonify != null && jsonify.structure.content) {
             const arrData = jsonify.structure.content;
             for (let i = 0; i < arrData.length; i++) {
               const element = arrData[i];
@@ -178,8 +178,8 @@ export default {
           this.title =
             jsonify != null && jsonify.structure.title
               ? jsonify.structure.title
-              : this.titleDefault;          
-        } else {          
+              : this.titleDefault;
+        } else {
           /**
            * si no se definió una estrucutra correcta se genera una estructura inicial básica
            */

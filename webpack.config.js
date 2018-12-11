@@ -2,9 +2,9 @@
  * archivo webpack para el proyecto dashboard
  */
 
-const path = require("path")
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const webpack = require('webpack');
+const path = require("path");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+//const webpack = require("webpack");
 
 module.exports = {
     entry: path.resolve("src/dashboard/index.js"),
@@ -34,7 +34,7 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /(node_modules)/,
                 use: {
-                    loader: 'babel-loader'/* ,
+                    loader: "babel-loader"/* ,
                   options: {
                     presets: ['es2015']
                   } */
@@ -44,7 +44,7 @@ module.exports = {
                 //que tipos de archivos quiero reconocer
                 test: /\.html$/,
                 use: {
-                    loader: 'html-loader'/* ,
+                    loader: "html-loader"/* ,
                   options: {
                     presets: ['es2015']
                   } */
@@ -60,15 +60,15 @@ module.exports = {
                     use: [
                         "css-loader",
                         {
-                            loader: 'stylus-loader',
+                            loader: "stylus-loader",
                             options: {
                                 use: [
-                                    require('nib'),
-                                    require('rupture')
+                                    require("nib"),
+                                    require("rupture")
                                 ],
                                 import: [
-                                    '~nib/lib/nib/index.styl',
-                                    '~rupture/rupture/index.styl'
+                                    "~nib/lib/nib/index.styl",
+                                    "~rupture/rupture/index.styl"
                                 ]
                             }
                         }
@@ -78,10 +78,10 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
+                    fallback: "style-loader",
                     use: [
-                        'css-loader',
-                        'sass-loader'
+                        "css-loader",
+                        "sass-loader"
                     ]
                 })
             },
@@ -89,7 +89,7 @@ module.exports = {
                 test: /\.(png|jpg|gif|woff|eot|ttf|woff2|svg)$/,
                 use: [
                     {
-                        loader: 'url-loader',
+                        loader: "url-loader",
                         options: {
                             limit: 100000
                         }
@@ -118,4 +118,4 @@ module.exports = {
         //     }
         // }
     }
-}
+};
