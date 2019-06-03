@@ -3,6 +3,7 @@ node_modules
 dist/
 dist-dashboard/js/bundle-dashboard.js
 dist-dashboard/js/bundle-web-components.min.js
+package-lock.json
 
 # local env files
 .env.local
