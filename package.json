@@ -22,7 +22,7 @@
     "deploy:githubpages": "git subtree push --prefix dist-dashboard origin gh-pages"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "camelcase": "^5.0.0",
     "dom-remove": "^1.1.0",
     "expose-loader": "^0.7.5",
